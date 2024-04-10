@@ -38,12 +38,11 @@ router.get('/:id', async ( req, res )=>{
 })
 
 //create conversation
-router.post('/newConversation/:id', async (req, res)=>{
+router.post('/newConversation/:id/:userId', async (req, res)=>{
 
     const id = req.params.id;
-    const user = req.body.userId;
-    const userId = user.userId;
-    console.log(userId);
+    const userId = req.params.userId;
+    console.log(userId, id);
 
 
     try{
