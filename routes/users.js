@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 //get all users
 router.get('/getAllUsers', async (req, res)=>{
     try{
-        const users = await User.find();
+        const users = await User.find({}, { _id : 1, username : 1, profilePicture : 1 });
         res.status(200).send(users);
     }catch(err){
         console.log('error fetching all the users of app...', err);
