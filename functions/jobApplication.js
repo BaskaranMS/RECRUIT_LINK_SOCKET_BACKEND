@@ -1,5 +1,8 @@
 const Mailgen = require('mailgen');
 const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const jobApplication = async (recruiterEmail, subject, body, resume, portfolio, applicantEmail) => {
     let config = {
