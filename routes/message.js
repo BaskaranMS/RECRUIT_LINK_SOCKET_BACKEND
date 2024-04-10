@@ -5,11 +5,12 @@ const user = require('../models/user.js');
 //get all user conversation
 router.get('/:id', async ( req, res )=>{
     let id = req.params.id;
-
+    console.log(id);
     try{
         let response = await Conversation.find({
             members : { $in : [ id ]}
         });
+        console.log(response);
         if(response.length < 1 ){
             res.status(404).send('No Conversation Found!!');
             return;
@@ -23,6 +24,7 @@ router.get('/:id', async ( req, res )=>{
                 }else{
                     recipient = await user.find({ _id : conversation.members[0]});
                 };
+                console.log('recipient', recipient);
                 data.push( {...conversation, 
                     username : recipient[0].username,
                     profilePic : recipient[0].profilePicture,
@@ -30,6 +32,7 @@ router.get('/:id', async ( req, res )=>{
             })
             })
         )
+        console.log(data);
         res.status(200).send(data);
     }catch(err){
         console.log(err);
