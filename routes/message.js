@@ -5,12 +5,12 @@ const user = require('../models/user.js');
 //get all user conversation
 router.get('/:id', async ( req, res )=>{
     let id = req.params.id;
-    console.log(id);
+    console.log('params id',id);
     try{
         let response = await Conversation.find({
             members : { $in : [ id ]}
         });
-        console.log(response);
+        console.log('response',response);
         if(response.length < 1 ){
             res.status(404).send('No Conversation Found!!');
             return;
@@ -32,7 +32,7 @@ router.get('/:id', async ( req, res )=>{
             })
             })
         )
-        console.log(data);
+        console.log('data',data);
         res.status(200).send(data);
     }catch(err){
         console.log(err);
