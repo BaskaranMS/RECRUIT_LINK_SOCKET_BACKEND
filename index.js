@@ -12,6 +12,7 @@ const editProfileRoute = require('./routes/editProfile.js');
 const jobApplyRoute = require('./routes/applyJob.js');
 const applicationResponseRoute = require('./routes/applicationResponse.js');
 const conversationRoute = require('./routes/message.js');
+const callRoute = require('./routes/videoCall.js');
 const multer = require('multer');
 const fs = require('fs');
 const Post = require('./models/post.js');
@@ -57,6 +58,7 @@ app.use('/api/application', jobRoute);
 app.use('/api/job', jobApplyRoute);
 app.use('/api/application/appliedcandidate', applicationResponseRoute);
 app.use('/api/conversation', conversationRoute);
+app.use('/api/call', callRoute);
 
 app.post('/api/posts/upload', upload.single('file'), async (req, res)=>{
     if(!req.file){

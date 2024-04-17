@@ -5,6 +5,10 @@ const user = require('../models/user.js');
 //get all user conversation
 router.get('/:id', async ( req, res )=>{
     let id = req.params.id;
+    if(id === ''){
+        res.status(404).send('no id provided');
+        return;
+    }
     console.log('params id',id);
     try{
         let response = await Conversation.find({
@@ -20,8 +24,10 @@ router.get('/:id', async ( req, res )=>{
             response.map(async (conversation)=>{
                 let recipient = '' ;
                 if( conversation.members[0] == id ){
+                    console.log(conversation.members[1])
                     recipient = await user.find({ _id : conversation.members[1] })
                 }else{
+                    console.log(conversation.members[0]);
                     recipient = await user.find({ _id : conversation.members[0]});
                 };
                 console.log('recipient', recipient);
@@ -39,6 +45,7 @@ router.get('/:id', async ( req, res )=>{
         res.status(500).send(err);
     }
 })
+
 
 //create conversation
 router.post('/newConversation/:id/:userId', async (req, res)=>{
